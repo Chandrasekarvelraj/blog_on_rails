@@ -1,9 +1,5 @@
 
- $("a").on('click', function () {
-    
-   tinymce.init({selector:'.mce-tinymce'});
 
- });
  
 // 	var clickBtnAddComment = function(){
 // 		$(document).on('click', '#btn_add_comment', function(){
