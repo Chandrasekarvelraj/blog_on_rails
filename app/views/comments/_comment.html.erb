@@ -1,0 +1,4 @@
+<p>
+	<%= image_tag User.find(comment.user_id).avatar.url(:thumb), :class => 'img-circle' %><strong><%= User.find(comment.user_id).name %> : </strong>
+	<%= comment.body %>
+</p>

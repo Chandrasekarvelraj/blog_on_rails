@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BlogOnRails</title>
+   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<!-Navigation bar-!>
+<nav class="navbar navbar-inverse navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Bolg Application</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+    </ul>
+   
+    <ul class="nav navbar-nav navbar-right">
+     <% if user_signed_in? %>
+      <li>
+      <span class="glyphicon glyphicon-user"> <%= current_user.name %> |
+        <span class="glyphicon glyphicon-log-out">
+       <%= link_to('Logout', destroy_user_session_path, method: :delete) %></span>
+      </li>
+    <% else %>
+      <li>
+        <a href="/users/sign_up"><span class="glyphicon glyphicon-user"> SignUp |</span></a>
+      </li>
+      <li>
+        <a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"> Login</span></a>
+      </li>
+          <% end %>
+    </ul>
+  </div>
+</nav>
+<table class="table1" cellspacing="0">
+<tr>
+<!-left panel-!>
+<td class="left-panel align-panel"><div>
+<% if user_signed_in? %>
+ <h3><i><u>Profile details :</u></i></h3></br>
+ <div >
+ <%= image_tag current_user.avatar.url(:medium), :class => 'img-circle' %>
+ </div></br>
+ <u>User Name:</u>
+<h4><span class="glyphicon glyphicon-user"> <%= current_user.name %></span></h4>
+</br>
+ <u>Email Id:</u>
+<h4><span class="glyphicon glyphicon-envelope"> <%= current_user.email %></span></h4>
+</br>
+</br>
+<%= link_to 'Edit Profile ', edit_user_registration_path %><span class="glyphicon glyphicon-pencil">
+<%  end %>
+</div>
+</td>
+<!-middle panel-!>
+<td class="middle-panel align-panel">
+<div class="noticeMsg">
+  <% flash.each do |key,value| %>
+  <% if value != true %>
+  <p><%= value %></p>
+  <% end %>
+<% end %>
+</div>
+<div>
+<%= yield %>
+
+</div></td>
+<!-right panel-!>
+<td class="right-panel align-panel"><div>
+  Advertisements
+</div></td>
+</tr>
+</table>
+
+
+</body>
+</html>
