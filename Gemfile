@@ -33,8 +33,16 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 #gem 'jquery-rails'
 gem 'paperclip', '~> 5.0.0'
-gem 'devise'
+gem 'devise', '~> 4.1.1'
+gem 'devise-token_authenticatable', '~> 0.5.0'
 gem 'tinymce-rails'
+gem 'cancancan', '~> 1.10'
+gem 'redis'	
+gem 'resque', require: 'resque/server'
+gem "devise-async"
+gem 'resque-web', require: 'resque_web'
+gem 'will_paginate'
+gem 'exception_notification'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

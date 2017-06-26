@@ -1,5 +1,6 @@
 <h1><u>Blog Application - My Articles</u></h1>
 <ul>
+
 	<% @articles.each do |article| %>
 	<h3>
 		<li>Author - <%= image_tag User.find(article.user_id).avatar.url(:thumb), :class => 'img-circle' %><%= User.find(article.user_id).name %></li>
@@ -9,12 +10,17 @@
 		Created&nbsp<%= time_ago_in_words(article.created_at) %>&nbspago</br>
 
 			<%= link_to 'View', article_path(article) %>
-			<% if is_correct_user?(article.user_id) %>
-			&nbsp&nbsp|&nbsp&nbsp
-   			<%= link_to edit_article_path(article) do %>Edit<% end %>&nbsp&nbsp|&nbsp&nbsp
-   			<%= link_to 'Delete', article_path(article),
-              method: :delete,
-              data: { confirm: "Do you want to delete this article? \n#{article[:title]}" } %><% end %></br>
+			<% if can? :update, article %>
+				&nbsp&nbsp|&nbsp&nbsp
+   				<%= link_to edit_article_path(article) do %>Edit<% end %>
+   			<%end%>
+   			<% if can? :destroy, article %>
+   				&nbsp&nbsp|&nbsp&nbsp
+   				<%= link_to 'Delete', article_path(article),
+              		method: :delete,
+             		 data: { confirm: "Do you want to delete this article? \n#{article[:title]}" } %>
+            <%end%>
+    </br>
     <strong><u>Comments</u></strong>
         <div id="<%= article.id %>">
             <% if article.comments.count >= 1 %>
@@ -28,6 +34,7 @@
 	<hr></hr>
 	
 	<% end %>
+  <%= will_paginate @articles %>
 </ul>
 </br>
 <h1><span class="glyphicon glyphicon-user">

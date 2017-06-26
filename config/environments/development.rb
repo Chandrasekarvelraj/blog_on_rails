@@ -14,6 +14,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   # Don't care if the mailer can't send.
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
 
@@ -51,4 +52,16 @@ Rails.application.configure do
 }
 
 Paperclip.options[:command_path] = "/usr/local/bin/"
+
+config.active_job.queue_adapter = :resque
+
+
+ENV['QUEUE'] = "*"
+
+ # config.middleware.use ExceptionNotification::Rack,
+ #    :email => {
+ #      :sender_address => %{"notifier" chandrasekarvelraj@gmail.com},
+ #      :exception_recipients => %w(chandrasekarvelraj@gmail.com)
+ #    }
+
 end

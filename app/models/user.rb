@@ -1,15 +1,23 @@
+
+
 class User < ActiveRecord::Base
 
 
-	has_attached_file :avatar, styles: { medium: "200x200>", thumb: "50x50>" }, default_url: "/images/:style/missing.png"
+	has_attached_file :avatar, styles: { medium: "200x200#", thumb: "50x50#" }, default_url: "/images/:style/missing.jpg"
 	validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
-
+	
 
 	validates	:name, {:presence => true, :uniqueness => true, :length => {:minimum =>2}}
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, 
+  devise :database_authenticatable, :async, :registerable, 
          :recoverable, :rememberable, :trackable, :validatable, :lockable
 has_many :articles, dependent: :destroy
 has_many :comments, dependent: :destroy
+
+
+def send_devise_notification(notification, *args)
+  devise_mailer.send(notification, self, *args).deliver_later
+end
+
 end
