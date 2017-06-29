@@ -1,10 +1,10 @@
 <%= form_for [article, article.comments.build], remote: true do |f| %>
 	<p>
-	<strong><%= image_tag current_user.avatar.url(:thumb), :class => 'img-circle' %><%= current_user.name %></strong>
-		<%= f.text_field :body, size: "50", placeholder: "Your comments" %>
+		<%= image_tag current_user.avatar.url(:thumb), :class => 'img-circle' %>
+		<%= f.text_field :body, size: "40", placeholder: "Your comments" %>
 		<% article.errors[:body].each do |msg| %>
    		<div class="errMsg"><%= msg %></div>
-   		<% end %>
+   	<% end %>
 		<%= f.submit "Add Comment", :class => "btnComment" %>
 	</p>
 <% end %>

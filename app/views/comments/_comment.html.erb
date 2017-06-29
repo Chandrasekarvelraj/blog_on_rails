@@ -1,4 +1,9 @@
 <p>
 	<%= image_tag User.find(comment.user_id).avatar.url(:thumb), :class => 'img-circle' %><strong><%= User.find(comment.user_id).name %> : </strong>
 	<%= comment.body %>
+	<% if can? :destroy, comment%>
+		<%= link_to article_comment_path(comment.article, comment),   method: :delete, data: { confirm: 'Are you sure?' } do %>
+			<span class="glyphicon glyphicon-trash"></span>
+		<%end%>
+	<% end %>
 </p>

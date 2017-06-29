@@ -1,15 +1,17 @@
 require "resque_web"
 Rails.application.routes.draw do
 
+  get 'search/search'
+
   devise_for :users, :controllers => { registrations: 'registrations' }
- # get 'articles/index'
-root 'articles#index'
+  root 'articles#index'
 
   resources :articles do
     resources :comments   
   end
-  
-raise ActiveRecord::RecordNotFound, "Record not found."
+  resources :friendships
+  resources :users
+  match "/404" => "errors#error404", via: [ :get, :post, :patch, :delete ]
 
   mount ResqueWeb::Engine => "/resque_web"
 # mount Resque: :server, :at => "/resque"

@@ -10,7 +10,8 @@ Rails.application.configure do
   config.eager_load = false
 
   # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local       = false
+  
   config.action_controller.perform_caching = true
 
   # Don't care if the mailer can't send.
@@ -49,19 +50,13 @@ Rails.application.configure do
   :password => 'tlexxnrpdlzivpol',
   :authentication => 'login',
   :enable_starttls_auto => true
-}
+  }
 
-Paperclip.options[:command_path] = "/usr/local/bin/"
+  Paperclip.options[:command_path] = "/usr/local/bin/"
 
-config.active_job.queue_adapter = :resque
+  config.active_job.queue_adapter = :resque
 
 
-ENV['QUEUE'] = "*"
-
- # config.middleware.use ExceptionNotification::Rack,
- #    :email => {
- #      :sender_address => %{"notifier" chandrasekarvelraj@gmail.com},
- #      :exception_recipients => %w(chandrasekarvelraj@gmail.com)
- #    }
+  ENV['QUEUE'] = "*"
 
 end

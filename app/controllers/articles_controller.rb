@@ -1,8 +1,10 @@
 class ArticlesController < ApplicationController
   include ActionView::Helpers::DateHelper 
   before_action :authenticate_user!
+  before_action :is_correct_user?, only: [:edit, :update, :destroy]
+
   def index
-  	@articles = Article.all.paginate(page: params[:page], per_page: 2)
+  	@articles = Article.all.paginate(page: params[:page], per_page: 3)
     respond_to do |format|
       format.html
       format.js
@@ -34,8 +36,8 @@ class ArticlesController < ApplicationController
 
   def update
   	@article = Article.find(params[:id])
-      @article.update(article_params)
-      redirect_to articles_path, :notice => "Your article was updated successfully"
+    @article.update(article_params)
+    redirect_to articles_path, :notice => "Your article was updated successfully"   
   end
 
   def destroy
@@ -43,12 +45,17 @@ class ArticlesController < ApplicationController
       @article.destroy
       redirect_to articles_path, :notice => "Your article was deleted successfully"
   end
-helper_method :is_correct_user?
-  def is_correct_user?(user_id)
-    (user_id == current_user.id) ? true : false
-  end
+
   private 
+
   def article_params
 	  params.require(:article).permit(:title, :content)
 	end
+
+  def is_correct_user?
+    unless Article.find(params[:id]).user_id == current_user.id
+      flash[:notice] = 'Access denied as you are not owner of this Article'
+      redirect_to articles_path
+    end
+  end
 end

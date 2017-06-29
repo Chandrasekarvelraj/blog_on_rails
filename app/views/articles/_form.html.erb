@@ -1,17 +1,15 @@
 <%= tinymce %>
 <%= form_for @article do |f| %>
-    <h5><%= f.label :title %></h5>
-    <%= f.text_field :title %>
-   
-   <% @article.errors[:title].each do |msg| %>
-   <div class="errMsg"><%= msg %></div>
-   <% end %>
-    <h5><%= f.label :content %></h5>
-    <%= f.text_area :content, :class => "tinymce", :rows => 5, :cols => 10 %>
-  <% @article.errors[:content].each do |msg| %>
-   <div class="errMsg"><%= msg %></div>
-   <% end %>
-    </br>
-    <%= f.submit :value => "Submit" %> 
-  
+  <h5><%= f.label :title %></h5>
+  <%= f.text_field :title %>
+    <% @article.errors[:title].each do |msg| %>
+      <div class="errMsg"><%= msg %></div>
+    <% end %>
+  <h5><%= f.label :content %></h5>
+  <%= f.text_area :content, :class => "tinymce", :rows => 5, :cols => 10 %>
+    <% @article.errors[:content].each do |msg| %>
+      <div class="errMsg"><%= msg %></div>
+    <% end %>
+  </br>
+  <%= f.submit :value => "Submit" %> 
 <% end %>

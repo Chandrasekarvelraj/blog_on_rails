@@ -1,41 +1,68 @@
-<h1><u>Blog Application - My Articles</u></h1>
+<h1><u>Blog Application - My Articles:</u></h1>
 <ul>
-
+<div class="paginate">
+  <div class="text-center btnlink">
+    <div class="fa fa-star fa">
+      <div class="fa fa-star-o">  
+        <%= link_to 'New Article', new_article_path, class: 'btnlink' %>
+          <div class="fa fa-star-o"> 
+            <div class="fa fa-star fa">
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr></hr>
 	<% @articles.each do |article| %>
-	<h3>
-		<li>Author - <%= image_tag User.find(article.user_id).avatar.url(:thumb), :class => 'img-circle' %><%= User.find(article.user_id).name %></li>
-	</h3>
-	<h4>Title - <%=link_to article.title, article %></br>
-		<%= raw article.content %></h4>
-		Created&nbsp<%= time_ago_in_words(article.created_at) %>&nbspago</br>
-
-			<%= link_to 'View', article_path(article) %>
-			<% if can? :update, article %>
-				&nbsp&nbsp|&nbsp&nbsp
-   				<%= link_to edit_article_path(article) do %>Edit<% end %>
-   			<%end%>
-   			<% if can? :destroy, article %>
-   				&nbsp&nbsp|&nbsp&nbsp
-   				<%= link_to 'Delete', article_path(article),
-              		method: :delete,
-             		 data: { confirm: "Do you want to delete this article? \n#{article[:title]}" } %>
-            <%end%>
-    </br>
-    <strong><u>Comments</u></strong>
+  <div class="articleContent">
+  	<h3>
+  		<li>Author - <%= image_tag User.find(article.user_id).avatar.url(:thumb), :class => 'img-circle' %><%= User.find(article.user_id).name %></li>
+  	</h3>
+  	<h4>Title - <%=link_to article.title, article %></br>
+  		<%= raw article.content %>
+    </h4>
+  	Created&nbsp<%= time_ago_in_words(article.created_at) %>&nbspago</br>
+  	<%= link_to article_path(article) do %><span class="glyphicon glyphicon-eye-open"></span><% end %>
+  		<% if can? :update, article %>
+  			&nbsp&nbsp|&nbsp&nbsp
+     		<%= link_to edit_article_path(article) do %><span class="glyphicon glyphicon-edit"></span><% end %>
+     	<%end%>
+     	<% if can? :destroy, article %>
+     		&nbsp&nbsp|&nbsp&nbsp
+     		<%= link_to article_path(article),method: :delete,
+        data: { confirm: "Do you want to delete this article? \n#{article[:title]}" } do %><span class="glyphicon glyphicon-trash"></span><% end %>
+      <%end%>
+      </br>
+      <strong><u>Comments</u></strong>
         <div id="<%= article.id %>">
-            <% if article.comments.count >= 1 %>
-				<% article.comments.each do |comment| %>
-        				<%= render 'comments/comment', comment: comment %>
-        		<% end %>       		
-        	<% end %>
-        </div>
-        	<%= render 'comments/form' , article: article %>	
-	
-	<hr></hr>
-	
+          <% if article.comments.count >= 1 %>
+  				  <% article.comments.each do |comment| %>
+              <%= render 'comments/comment', comment: comment %>
+            <% end %>       		
+          <% end %>
+          </div>
+      <%= render 'comments/form' , article: article %>
+    </div>	
+  	<hr></hr>
 	<% end %>
-  <%= will_paginate @articles %>
+  <div class="text-center paginate">
+    <%= will_paginate @articles %>
+  </div>
+  </br>
+<div class="paginate">
+  <div class="text-center btnlink">
+    <div class="fa fa-star fa">
+      <div class="fa fa-star-o">  
+        <%= link_to 'New Article', new_article_path, class: 'btnlink' %>
+          <div class="fa fa-star-o"> 
+            <div class="fa fa-star fa">
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr></hr>
 </ul>
-</br>
-<h1><span class="glyphicon glyphicon-user">
-<%= link_to 'New Article', new_article_path %></h1>
+

@@ -1,16 +1,18 @@
-<h3>
-	<li>Author - <%= image_tag User.find(@article.user_id).avatar.url(:thumb), :class => 'img-circle' %><%= User.find(@article.user_id).name %></li>
-</h3>
-<h4>
-	Title - <%= @article.title %>
-	<%= raw @article.content %></h4>
-Created&nbsp<%= time_ago_in_words(@article.created_at) %>&nbspago</br>
-	<strong><u>Comments</u></strong>
-	<%#= render @article.comments %>
-	<div id="<%= @article.id %>">
-		<% @article.comments.each do |comment|%>
-			<%= render '/comments/comment', comment: comment %>
-		<% end %>
-	</div>
-	<%= render 'comments/form', article: @article %>
-	<%= link_to 'Back', articles_path %>
+<h1><u>Article:</u></h1>
+<div class="articleContent">
+	<h3>
+		<li>Author - <%= image_tag User.find(@article.user_id).avatar.url(:thumb), :class => 'img-circle' %><%= User.find(@article.user_id).name %></li>
+	</h3>
+	<h4>
+		Title - <%= @article.title %>
+		<%= raw @article.content %></h4>
+	Created&nbsp<%= time_ago_in_words(@article.created_at) %>&nbspago</br>
+		<strong><u>Comments</u></strong>
+			<div id="<%= @article.id %>">
+					<% @article.comments.each do |comment|%>
+							<%= render '/comments/comment', comment: comment %>
+					<% end %>
+			</div>
+		<%= render 'comments/form', article: @article %>
+		<%= link_to 'Back', articles_path %>
+</div>

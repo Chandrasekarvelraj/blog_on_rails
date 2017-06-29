@@ -43,6 +43,8 @@ gem "devise-async"
 gem 'resque-web', require: 'resque_web'
 gem 'will_paginate'
 gem 'exception_notification'
+gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: '2.x'
+gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '2.x'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
