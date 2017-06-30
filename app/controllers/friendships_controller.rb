@@ -5,12 +5,8 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    friendship = current_user.friendships.build(:friend_id => params[:friend_id])
     @friend_id = params[:friend_id]
-    friend = Friendship.new
-    friend.user_id = params[:friend_id]
-    friend.friend_id = current_user.id
-    if friendship.save && friend.save
+    if Friendship.add_friend(current_user.id, params[:friend_id]) &&  Friendship.add_friend(params[:friend_id], current_user.id)
       respond_to do |format|
         format.html
         format.js {  flash.now[:notice] = "Added Friend Successfully" }
@@ -22,17 +18,20 @@ class FriendshipsController < ApplicationController
   end
 
   def show
+    @user = current_user.friendships
   end
   
   def destroy
     friendship = current_user.friendships.find(params[:id])
     @friendship_id = params[:id]
-    friend = Friendship.find_by user_id: friendship.friend_id, friend_id: current_user.id
-    friend.destroy
-    friendship.destroy
+    if Friendship.remove_friend(friendship.friend_id, current_user.id) && Friendship.remove_friend(current_user.id, friendship.friend_id)
       respond_to do |format|
         format.html
         format.js {  flash.now[:notice] = "Friend Removed successfully" }
-      end 
+      end
+    else
+      flash[:error] = "Error occurred when adding friend."
+      redirect_to root_url
+    end  
   end
 end

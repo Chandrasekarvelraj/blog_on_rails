@@ -1,17 +1,17 @@
 <h1><u><i><%= current_user.name.capitalize %>'s </i>Friends List:</u></h1>
 <div class="articleContent">
-	<ul>
-	  <% current_user.friendships.each do |friendship| %>
-	    <div id="<%=friendship.id%>">
-		    <li>
-		    	<h3><%= image_tag friendship.friend.avatar.url(:thumb), :class => 'img-circle' %>
-		      <%= friendship.friend.name.capitalize %>
-		      - <%= link_to friendship, :method => :delete, :remote => true do %>
-		      <%= image_tag "remove.png", class: 'imgAdd' %></h3>
-		      <% end %>
-		    </li>
-	    </div>
-	  <% end %>
-	</ul>
-	<p><%= link_to "Find New Friends", friendships_path %> | <%= link_to 'Home', articles_path %></p>
+  <ul>
+    <% @user.each do |friendship| %>
+      <div id="<%=friendship.id%>">
+        <li>
+          <h3><%= image_tag friendship.friend.avatar.url(:thumb), :class => 'img-circle' %>
+          <%= friendship.friend.name.capitalize %>
+          - <%= link_to friendship, :method => :delete, :remote => true do %>
+          <%= image_tag "remove.png", class: 'imgAdd' %></h3>
+          <% end %>
+        </li>
+      </div>
+    <% end %>
+  </ul>
+  <p><%= link_to "Find New Friends", friendships_path %> | <%= link_to 'Home', articles_path %></p>
 </div>
