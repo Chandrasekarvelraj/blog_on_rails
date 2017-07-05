@@ -2,8 +2,9 @@ require "resque_web"
 Rails.application.routes.draw do
 
   get 'search/search'
-
-  devise_for :users, :controllers => { registrations: 'registrations' }
+  get 'search/index'
+devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  #devise_for :users, :controllers => { registrations: 'registrations' }
   root 'articles#index'
 
   resources :articles do

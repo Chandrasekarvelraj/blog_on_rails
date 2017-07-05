@@ -32,7 +32,7 @@
               <%= form_for search_search_path, :url => { :controller => :search, :action => :search }, method: :get do |f| %>
                 <p>
                   <span class="glyphicon glyphicon-search"></span>
-                  <%= text_field_tag :query, params[:query], placeholder: "Search for articles", required: true %>
+                  <%= text_field_tag :query, params[:query], placeholder: "Search for articles", required: true, id: "searchText" %>
                   <%= submit_tag "Go", name: nil, :class => "btnComment" %>
                 </p>
               <% end %>

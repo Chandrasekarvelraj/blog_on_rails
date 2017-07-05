@@ -16,6 +16,8 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
+gem 'jquery-ui-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -45,6 +47,8 @@ gem 'will_paginate'
 gem 'exception_notification'
 gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: '2.x'
 gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '2.x'
+gem 'omniauth'
+gem 'omniauth-facebook', '1.4.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
