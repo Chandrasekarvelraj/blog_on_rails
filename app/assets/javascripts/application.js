@@ -30,3 +30,16 @@ $(document).ready(function(){
             .appendTo( ul );
     };
 });
+function myMap() {
+var mapOptions = {
+    center: new google.maps.LatLng(20.349150, 85.807660),
+    zoom: 10,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+}
+var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+// Creating a marker and positioning it on the map  
+    var marker = new google.maps.Marker({  
+      position: new google.maps.LatLng(20.349150, 85.807660),  
+      map: map  
+    });
+}
