@@ -6,7 +6,7 @@ class Article < ActiveRecord::Base
   validates   :title, {:presence => true, :uniqueness => true, :length => {:minimum =>2}}
   validates   :content, :presence => true
 
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  #include Elasticsearch::Model
+  #include Elasticsearch::Model::Callbacks
 end
-Article.import force: true
+#Article.import force: true
