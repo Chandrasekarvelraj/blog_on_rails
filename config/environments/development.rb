@@ -51,7 +51,7 @@ Rails.application.configure do
   :authentication => 'login',
   :enable_starttls_auto => true
   }
-
+Paperclip.options[:image_magick_path] = "/usr/local/bin"
   Paperclip.options[:command_path] = "/usr/local/bin/"
 
   config.active_job.queue_adapter = :resque
