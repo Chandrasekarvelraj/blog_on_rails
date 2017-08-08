@@ -30,7 +30,7 @@
             <a href="#"><span class="glyphicon glyphicon-home"></span> Home</a>
           <% end %>
           </li>
-          <li>
+          <!-- <li>
             <% if user_signed_in? %>
               <%= form_for search_search_path, :url => { :controller => :search, :action => :search }, method: :get do |f| %>
                 <p>
@@ -40,7 +40,7 @@
                 </p>
               <% end %>
             <% end %>
-          </li>
+          </li> -->
         </ul>       
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %><h4>
