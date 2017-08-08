@@ -3,8 +3,8 @@ Rails.application.routes.draw do
 
   get 'search/search'
   get 'search/index'
-devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  #devise_for :users, :controllers => { registrations: 'registrations' }
+  #devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { registrations: 'registrations' }
   root 'articles#index'
 
   resources :articles do

@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   validates   :name, {:presence => true, :uniqueness => true, :length => {:minimum =>2}}
   
   devise :database_authenticatable, :async, :registerable, 
-         :recoverable, :rememberable, :trackable, :validatable, :lockable, :omniauthable, :omniauth_providers => [:facebook]
+         :recoverable, :rememberable, :trackable, :validatable, :lockable
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :friendships
