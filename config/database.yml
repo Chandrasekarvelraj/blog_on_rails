@@ -4,22 +4,58 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 #
+# default: &default
+#   adapter: sqlite3
+#   pool: 5
+#   timeout: 5000
+
+# development:
+#   <<: *default
+#   database: db/development.sqlite3
+
+# # Warning: The database defined as "test" will be erased and
+# # re-generated from your development database when you run "rake".
+# # Do not set this db to the same as development or production.
+# test:
+#   <<: *default
+#   database: db/test.sqlite3
+
+# production:
+#   <<: *default
+#   database: db/production.sqlite3
+
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
   pool: 5
   timeout: 5000
 
 development:
   <<: *default
-  database: db/development.sqlite3
-
+  database: postgres
+  username: postgres
+  password: mindfire
+  host: localhost
+# development:
+#   adapter: postgresql
+#   database: blograils
+#   username: root
+#   password: mindfire 
+#   host: localhost
+  
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: db/test.sqlite3
+# test:
+#   adapter: mysql2
+#   database: aggdata_test
+#   username: root
+#   password: mindfire
+#   host: localhost
+
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  database: dd1cs5rak40nq6
+  username: jbuvtphpkrwuih
+  password: e6cb185b8d1dac552df3d768134cc4fdaebe39377f1e6d6ede5c49bf95b9edc6
+  host: ec2-23-23-248-162.compute-1.amazonaws.com
